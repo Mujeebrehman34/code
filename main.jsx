@@ -26,6 +26,7 @@ import {
   Stethoscope,
   ShoppingCart,
   Lightbulb,
+  Star,
 } from "lucide-react"
 import { toast } from "sonner"
 import {
@@ -58,8 +59,8 @@ export default function AdminPanel() {
   const [orders, setOrders] = useState([])
   const [featureSuggestions, setFeatureSuggestions] = useState([])
 
-  const [bookingFilterStatus, setBookingFilterStatus] = useState("all")
   const [bookingSearchTerm, setBookingSearchTerm] = useState("")
+  const [bookingFilterStatus, setBookingFilterStatus] = useState("all")
   const [filteredBookings, setFilteredBookings] = useState([])
 
   const getAllFeatureSuggestions = async () => {
@@ -310,27 +311,16 @@ export default function AdminPanel() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-emerald-200/30 to-green-300/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-green-200/30 to-emerald-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-
-        <div className="text-center p-8 bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-green-100/50 relative z-10 transform hover:scale-105 transition-all duration-500">
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 flex items-center justify-center">
+        <div className="text-center p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-green-100">
           <div className="relative mb-6">
-            <div className="w-20 h-20 mx-auto bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-              <RefreshCw className="w-10 h-10 text-white animate-spin" />
+            <div className="w-16 h-16 mx-auto bg-gradient-to-r from-emerald-400 to-green-500 rounded-full flex items-center justify-center animate-pulse">
+              <RefreshCw className="w-8 h-8 text-white animate-spin" />
             </div>
-            <div className="absolute inset-0 w-20 h-20 mx-auto bg-gradient-to-r from-emerald-400 to-green-500 rounded-full animate-ping opacity-20"></div>
-            <div className="absolute inset-0 w-20 h-20 mx-auto bg-gradient-to-r from-emerald-400 to-green-500 rounded-full animate-pulse opacity-30 delay-500"></div>
+            <div className="absolute inset-0 w-16 h-16 mx-auto bg-gradient-to-r from-emerald-400 to-green-500 rounded-full animate-ping opacity-20"></div>
           </div>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-green-700 bg-clip-text text-transparent mb-3">
-            Loading Admin Panel
-          </h2>
-          <p className="text-gray-600 text-lg">Preparing your dashboard...</p>
-          <div className="mt-4 w-48 h-1 bg-gray-200 rounded-full mx-auto overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-emerald-400 to-green-500 rounded-full animate-pulse"></div>
-          </div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">Loading Admin Panel</h2>
+          <p className="text-gray-600">Preparing your dashboard...</p>
         </div>
       </div>
     )
@@ -836,80 +826,57 @@ export default function AdminPanel() {
               <p className="text-sm text-muted-foreground">Manage and track all consultation requests</p>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-                <div className="group flex items-center gap-3 p-6 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl border border-blue-200/50 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-                  <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
-                    <Calendar className="w-5 h-5 text-white" />
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-lg border">
+                  <div className="p-2 bg-blue-100 rounded-full">
+                    <Users className="w-4 h-4 text-blue-600" />
                   </div>
                   <div>
-                    <div className="text-2xl lg:text-3xl font-bold text-blue-700 group-hover:text-blue-800 transition-colors">
-                      {bookingStats.total}
-                    </div>
-                    <div className="text-sm text-blue-600 font-medium">Total Bookings</div>
-                  </div>
-                  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    <div className="text-xl lg:text-2xl font-bold text-blue-600">{bookingStats.total}</div>
+                    <div className="text-xs lg:text-sm text-blue-600">Total Requests</div>
                   </div>
                 </div>
-
-                <div className="group flex items-center gap-3 p-6 bg-gradient-to-br from-yellow-50 to-amber-100/50 rounded-2xl border border-yellow-200/50 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-                  <div className="p-3 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-xl shadow-lg group-hover:shadow-yellow-500/25 transition-all duration-300">
-                    <Clock className="w-5 h-5 text-white" />
+                <div className="flex items-center gap-3 p-4 bg-yellow-50 rounded-lg border">
+                  <div className="p-2 bg-yellow-100 rounded-full">
+                    <Clock className="w-4 h-4 text-yellow-600" />
                   </div>
                   <div>
-                    <div className="text-2xl lg:text-3xl font-bold text-yellow-700 group-hover:text-yellow-800 transition-colors">
-                      {bookingStats.pending}
-                    </div>
-                    <div className="text-sm text-yellow-600 font-medium">Pending</div>
-                  </div>
-                  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                    <div className="text-xl lg:text-2xl font-bold text-yellow-600">{bookingStats.pending}</div>
+                    <div className="text-xs lg:text-sm text-yellow-600">Pending</div>
                   </div>
                 </div>
-
-                <div className="group flex items-center gap-3 p-6 bg-gradient-to-br from-emerald-50 to-green-100/50 rounded-2xl border border-green-200/50 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-                  <div className="p-3 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300">
-                    <Check className="w-5 h-5 text-white" />
+                <div className="flex items-center gap-3 p-4 bg-green-50 rounded-lg border">
+                  <div className="p-2 bg-green-100 rounded-full">
+                    <Check className="w-4 h-4 text-green-600" />
                   </div>
                   <div>
-                    <div className="text-2xl lg:text-3xl font-bold text-emerald-700 group-hover:text-emerald-800 transition-colors">
-                      {bookingStats.accepted}
-                    </div>
-                    <div className="text-sm text-emerald-600 font-medium">Accepted</div>
-                  </div>
-                  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                    <div className="text-xl lg:text-2xl font-bold text-green-600">{bookingStats.accepted}</div>
+                    <div className="text-xs lg:text-sm text-green-600">Accepted</div>
                   </div>
                 </div>
-
-                <div className="group flex items-center gap-3 p-6 bg-gradient-to-br from-red-50 to-red-100/50 rounded-2xl border border-red-200/50 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-                  <div className="p-3 bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-lg group-hover:shadow-red-500/25 transition-all duration-300">
-                    <X className="w-5 h-5 text-white" />
+                <div className="flex items-center gap-3 p-4 bg-red-50 rounded-lg border">
+                  <div className="p-2 bg-red-100 rounded-full">
+                    <X className="w-4 h-4 text-red-600" />
                   </div>
                   <div>
-                    <div className="text-2xl lg:text-3xl font-bold text-red-700 group-hover:text-red-800 transition-colors">
-                      {bookingStats.rejected}
-                    </div>
-                    <div className="text-sm text-red-600 font-medium">Rejected</div>
-                  </div>
-                  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                    <div className="text-xl lg:text-2xl font-bold text-red-600">{bookingStats.rejected}</div>
+                    <div className="text-xs lg:text-sm text-red-600">Rejected</div>
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-col lg:flex-row gap-4">
-                <div className="relative flex-1 group">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 group-focus-within:text-emerald-500 transition-colors duration-300" />
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <Input
-                    placeholder="Search bookings..."
+                    placeholder="Search by name, email, or service type..."
                     value={bookingSearchTerm}
                     onChange={(e) => setBookingSearchTerm(e.target.value)}
-                    className="pl-12 pr-4 rounded-full border-gray-300 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow duration-300 shadow-sm group-hover:shadow-md"
+                    className="pl-10"
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <Filter className="w-5 h-5 text-gray-500" />
+                  <Filter className="w-4 h-4 text-gray-500" />
                   <div className="flex gap-1 overflow-x-auto">
                     {["all", "pending", "accepted", "rejected"].map((status) => (
                       <Button
@@ -917,7 +884,7 @@ export default function AdminPanel() {
                         variant={bookingFilterStatus === status ? "default" : "outline"}
                         size="sm"
                         onClick={() => setBookingFilterStatus(status)}
-                        className="capitalize whitespace-nowrap rounded-full transition-colors duration-200"
+                        className="capitalize whitespace-nowrap"
                       >
                         {status}
                         {status !== "all" && (
@@ -934,183 +901,177 @@ export default function AdminPanel() {
               </div>
 
               {/* Bookings List */}
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {filteredBookings.length === 0 ? (
-                  <div className="text-center py-16 rounded-lg bg-gray-50 border">
-                    <MessageSquare className="w-10 h-10 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-gray-900">No bookings found</h3>
-                    <p className="text-gray-500">There are no consultation requests matching your current criteria.</p>
+                  <div className="text-center py-12">
+                    <MessageSquare className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">No bookings found</h3>
+                    <p className="text-gray-500">No consultation requests match your current filters.</p>
                   </div>
                 ) : (
                   filteredBookings.map((booking) => (
                     <div
                       key={booking.id}
-                      className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 border"
+                      className="border rounded-lg p-4 lg:p-6 bg-white hover:shadow-md transition-shadow"
                     >
-                      <div className="p-5 lg:p-6">
-                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
-                          <div className="flex items-center gap-4">
-                            <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-                              <span className="text-blue-600 font-semibold text-lg">
-                                {(booking.clientName || booking.name || "")
-                                  .split(" ")
-                                  .map((n) => n[0])
-                                  .join("")
-                                  .toUpperCase()}
-                              </span>
-                            </div>
-                            <div className="min-w-0">
-                              <h3 className="font-semibold text-lg text-gray-900 truncate">
-                                {booking.clientName || booking.name}
-                              </h3>
-                              <p className="text-gray-600 truncate">{booking.email}</p>
-                            </div>
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span className="text-blue-600 font-semibold">
+                              {(booking.clientName || booking.name || "")
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")
+                                .toUpperCase()}
+                            </span>
                           </div>
-                          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                            {getStatusBadge(booking.status)}
-                            <Dialog>
-                              <DialogTrigger asChild>
-                                <Button variant="outline" size="sm" className="w-full sm:w-auto bg-transparent">
-                                  <Eye className="w-4 h-4 mr-2" />
-                                  View Details
-                                </Button>
-                              </DialogTrigger>
-                              <DialogContent className="max-w-3xl mx-4">
-                                <DialogHeader>
-                                  <DialogTitle>Booking Details</DialogTitle>
-                                </DialogHeader>
-                                <ScrollArea className="max-h-96">
-                                  <div className="space-y-6">
-                                    <div>
-                                      <h4 className="font-semibold mb-3 flex items-center gap-2 text-gray-800">
-                                        <User className="w-4 h-4" />
-                                        Client Information
-                                      </h4>
-                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div>
-                                          <label className="text-sm font-medium text-gray-500">Name</label>
-                                          <p className="text-gray-700">{booking.clientName || booking.name}</p>
-                                        </div>
-                                        <div>
-                                          <label className="text-sm font-medium text-gray-500">Email</label>
-                                          <p className="text-gray-700 break-all">{booking.email}</p>
-                                        </div>
-                                        <div>
-                                          <label className="text-sm font-medium text-gray-500">Phone</label>
-                                          <p className="text-gray-700">{booking.phone || "Not provided"}</p>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <div>
-                                      <h4 className="font-semibold mb-3 flex items-center gap-2 text-gray-800">
-                                        <Stethoscope className="w-4 h-4" />
-                                        Consultation Details
-                                      </h4>
-                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div>
-                                          <label className="text-sm font-medium text-gray-500">Service Type</label>
-                                          <p className="text-gray-700">
-                                            {booking.serviceType || booking.consultationType}
-                                          </p>
-                                        </div>
-                                        <div>
-                                          <label className="text-sm font-medium text-gray-500">Specialty</label>
-                                          <p className="text-gray-700">{booking.specialty || "Not specified"}</p>
-                                        </div>
-                                        <div>
-                                          <label className="text-sm font-medium text-gray-500">Assigned Engineer</label>
-                                          <p className="text-gray-700">{booking.engineerName || "Not assigned"}</p>
-                                        </div>
-                                        <div>
-                                          <label className="text-sm font-medium text-gray-500">Preferred Date</label>
-                                          <p className="text-gray-700">{booking.preferredDate || "Not specified"}</p>
-                                        </div>
-                                        <div>
-                                          <label className="text-sm font-medium text-gray-500">Preferred Time</label>
-                                          <p className="text-gray-700">{booking.preferredTime || "Not specified"}</p>
-                                        </div>
-                                        {booking.engineerId && (
-                                          <div>
-                                            <label className="text-sm font-medium text-gray-500">Engineer ID</label>
-                                            <p className="text-gray-700">{booking.engineerId}</p>
-                                          </div>
-                                        )}
-                                      </div>
-                                    </div>
-
-                                    {booking.message && (
-                                      <div>
-                                        <h4 className="font-semibold mb-3 flex items-center gap-2 text-gray-800">
-                                          <MessageSquare className="w-4 h-4" />
-                                          Message
-                                        </h4>
-                                        <div className="p-4 bg-gray-50 rounded-md">
-                                          <p className="text-gray-700 break-words">{booking.message}</p>
-                                        </div>
-                                      </div>
-                                    )}
-
-                                    {booking.requirements && (
-                                      <div>
-                                        <h4 className="font-semibold mb-3 text-gray-800">Requirements</h4>
-                                        <div className="p-4 bg-gray-50 rounded-md">
-                                          <p className="text-gray-700 break-words">{booking.requirements}</p>
-                                        </div>
-                                      </div>
-                                    )}
-                                  </div>
-                                </ScrollArea>
-                              </DialogContent>
-                            </Dialog>
+                          <div className="min-w-0">
+                            <h3 className="font-semibold text-lg truncate">{booking.clientName || booking.name}</h3>
+                            <p className="text-gray-600 truncate">{booking.email}</p>
                           </div>
                         </div>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+                          {getStatusBadge(booking.status)}
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm" className="w-full sm:w-auto bg-transparent">
+                                <Eye className="w-4 h-4 mr-1" />
+                                View Details
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-2xl mx-4">
+                              <DialogHeader>
+                                <DialogTitle>Booking Details</DialogTitle>
+                              </DialogHeader>
+                              <ScrollArea className="max-h-96">
+                                <div className="space-y-6">
+                                  <div>
+                                    <h4 className="font-semibold mb-3 flex items-center gap-2">
+                                      <User className="w-4 h-4" />
+                                      Client Information
+                                    </h4>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                      <div>
+                                        <label className="text-sm font-medium text-gray-500">Name</label>
+                                        <p>{booking.clientName || booking.name}</p>
+                                      </div>
+                                      <div>
+                                        <label className="text-sm font-medium text-gray-500">Email</label>
+                                        <p className="break-all">{booking.email}</p>
+                                      </div>
+                                      <div>
+                                        <label className="text-sm font-medium text-gray-500">Phone</label>
+                                        <p>{booking.phone || "Not provided"}</p>
+                                      </div>
+                                    </div>
+                                  </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <Stethoscope className="w-4 h-4 flex-shrink-0" />
-                            <span className="truncate">{booking.serviceType || booking.consultationType}</span>
-                          </div>
-                          {booking.preferredDate && (
-                            <div className="flex items-center gap-2 text-sm text-gray-600">
-                              <Calendar className="w-4 h-4 flex-shrink-0" />
-                              <span>{booking.preferredDate}</span>
-                            </div>
-                          )}
-                          {booking.preferredTime && (
-                            <div className="flex items-center gap-2 text-sm text-gray-600">
-                              <Clock className="w-4 h-4 flex-shrink-0" />
-                              <span>{booking.preferredTime}</span>
-                            </div>
-                          )}
+                                  <div>
+                                    <h4 className="font-semibold mb-3 flex items-center gap-2">
+                                      <Stethoscope className="w-4 h-4" />
+                                      Consultation Details
+                                    </h4>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                      <div>
+                                        <label className="text-sm font-medium text-gray-500">Service Type</label>
+                                        <p>{booking.serviceType || booking.consultationType}</p>
+                                      </div>
+                                      <div>
+                                        <label className="text-sm font-medium text-gray-500">Specialty</label>
+                                        <p>{booking.specialty || "Not specified"}</p>
+                                      </div>
+                                      <div>
+                                        <label className="text-sm font-medium text-gray-500">Assigned Engineer</label>
+                                        <p>{booking.engineerName || "Not assigned"}</p>
+                                      </div>
+                                      <div>
+                                        <label className="text-sm font-medium text-gray-500">Preferred Date</label>
+                                        <p>{booking.preferredDate || "Not specified"}</p>
+                                      </div>
+                                      <div>
+                                        <label className="text-sm font-medium text-gray-500">Preferred Time</label>
+                                        <p>{booking.preferredTime || "Not specified"}</p>
+                                      </div>
+                                      {booking.engineerId && (
+                                        <div>
+                                          <label className="text-sm font-medium text-gray-500">Engineer ID</label>
+                                          <p>{booking.engineerId}</p>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  {booking.message && (
+                                    <div>
+                                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                                        <MessageSquare className="w-4 h-4" />
+                                        Message
+                                      </h4>
+                                      <div className="p-3 bg-gray-50 rounded-md">
+                                        <p className="break-words">{booking.message}</p>
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {booking.requirements && (
+                                    <div>
+                                      <h4 className="font-semibold mb-3">Requirements</h4>
+                                      <div className="p-3 bg-gray-50 rounded-md">
+                                        <p className="break-words">{booking.requirements}</p>
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </ScrollArea>
+                            </DialogContent>
+                          </Dialog>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Stethoscope className="w-4 h-4 flex-shrink-0" />
+                          <span className="truncate">{booking.serviceType || booking.consultationType}</span>
+                        </div>
+                        {booking.preferredDate && (
                           <div className="flex items-center gap-2 text-sm text-gray-600">
                             <Calendar className="w-4 h-4 flex-shrink-0" />
-                            <span>{formatDate(booking.createdAt || booking.timestamp)}</span>
-                          </div>
-                        </div>
-
-                        {(!booking.status || booking.status === "pending") && (
-                          <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-100">
-                            <Button
-                              size="sm"
-                              onClick={() => handleBookingStatusUpdate(booking.id, "accepted")}
-                              className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white shadow-lg hover:shadow-emerald-500/25 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto font-medium"
-                            >
-                              <Check className="w-4 h-4 mr-2" />
-                              Accept Booking
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              onClick={() => handleBookingStatusUpdate(booking.id, "rejected")}
-                              className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 shadow-lg hover:shadow-red-500/25 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto font-medium"
-                            >
-                              <X className="w-4 h-4 mr-2" />
-                              Reject Booking
-                            </Button>
+                            <span>{booking.preferredDate}</span>
                           </div>
                         )}
+                        {booking.preferredTime && (
+                          <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <Clock className="w-4 h-4 flex-shrink-0" />
+                            <span>{booking.preferredTime}</span>
+                          </div>
+                        )}
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Calendar className="w-4 h-4 flex-shrink-0" />
+                          <span>{formatDate(booking.createdAt || booking.timestamp)}</span>
+                        </div>
                       </div>
+
+                      {(!booking.status || booking.status === "pending") && (
+                        <div className="flex flex-col sm:flex-row gap-2 pt-4 border-t">
+                          <Button
+                            size="sm"
+                            onClick={() => handleBookingStatusUpdate(booking.id, "accepted")}
+                            className="bg-green-600 hover:bg-green-700 w-full sm:w-auto"
+                          >
+                            <Check className="w-4 h-4 mr-1" />
+                            Accept
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() => handleBookingStatusUpdate(booking.id, "rejected")}
+                            className="w-full sm:w-auto"
+                          >
+                            <X className="w-4 h-4 mr-1" />
+                            Reject
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   ))
                 )}
@@ -1362,55 +1323,34 @@ export default function AdminPanel() {
                                               className="w-12 h-12 object-cover rounded"
                                             />
                                             <div className="flex-1">
-                                              <div className="font-semibold">{item.name}</div>
-                                              <div className="text-sm text-gray-500">Quantity: {item.quantity}</div>
-                                              <div className="text-sm text-gray-500">
-                                                Price: ${item.price?.toFixed(2)}
-                                              </div>
+                                              <h5 className="font-medium">{item.name}</h5>
+                                              <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
+                                              <p className="text-sm text-gray-500">Price: ${item.price?.toFixed(2)}</p>
                                             </div>
-                                            <div>${(item.price * item.quantity)?.toFixed(2)}</div>
                                           </div>
                                         ))}
                                       </div>
                                     </div>
 
-                                    <div>
-                                      <h4 className="font-semibold mb-2">Summary</h4>
-                                      <div className="space-y-1 text-sm">
-                                        <div>
-                                          <strong>Subtotal:</strong> ${order.subtotal?.toFixed(2)}
-                                        </div>
-                                        <div>
-                                          <strong>Shipping:</strong> ${order.shipping?.toFixed(2)}
-                                        </div>
-                                        <div>
-                                          <strong>Tax:</strong> ${order.tax?.toFixed(2)}
-                                        </div>
-                                        <div>
-                                          <strong>Total:</strong> ${order.total?.toFixed(2)}
-                                        </div>
-                                      </div>
+                                    <div className="text-right">
+                                      <h4 className="font-semibold">Total: ${order.total?.toFixed(2)}</h4>
                                     </div>
                                   </div>
                                 </ScrollArea>
                               </DialogContent>
                             </Dialog>
-                            {(!order.status || order.status === "pending") && (
-                              <>
-                                <Button size="sm" onClick={() => updateOrderStatus(order.id, "processing")}>
-                                  <Check className="w-4 h-4" />
-                                  <span className="sr-only">Approve</span>
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="destructive"
-                                  onClick={() => updateOrderStatus(order.id, "cancelled")}
-                                >
-                                  <X className="w-4 h-4" />
-                                  <span className="sr-only">Reject</span>
-                                </Button>
-                              </>
-                            )}
+
+                            <select
+                              value={order.status}
+                              onChange={(e) => handleOrderStatus(order.id, e.target.value)}
+                              className="border rounded px-2 py-1 text-sm"
+                            >
+                              <option value="pending">Pending</option>
+                              <option value="processing">Processing</option>
+                              <option value="shipped">Shipped</option>
+                              <option value="delivered">Delivered</option>
+                              <option value="cancelled">Cancelled</option>
+                            </select>
                           </div>
                         </TableCell>
                       </TableRow>
@@ -1430,19 +1370,19 @@ export default function AdminPanel() {
                 <MessageSquare className="w-5 h-5" />
                 User Feedback
               </CardTitle>
-              <p className="text-sm text-muted-foreground">Review and manage user feedback</p>
+              <p className="text-sm text-muted-foreground">Manage and respond to user feedback</p>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="min-w-[140px]">User</TableHead>
+                      <TableHead className="min-w-[160px]">Name</TableHead>
                       <TableHead className="min-w-[180px]">Email</TableHead>
                       <TableHead className="min-w-[200px]">Feedback</TableHead>
                       <TableHead className="min-w-[100px]">Rating</TableHead>
                       <TableHead className="min-w-[100px]">Status</TableHead>
-                      <TableHead className="min-w-[120px]">Date</TableHead>
+                      <TableHead className="min-w-[120px]">Submitted</TableHead>
                       <TableHead className="min-w-[140px]">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -1451,8 +1391,14 @@ export default function AdminPanel() {
                       <TableRow key={fb.id}>
                         <TableCell className="font-medium">{fb.name}</TableCell>
                         <TableCell>{fb.email}</TableCell>
-                        <TableCell className="truncate">{fb.feedback}</TableCell>
-                        <TableCell>{fb.rating}</TableCell>
+                        <TableCell className="truncate">{fb.feedbackText}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1">
+                            {[...Array(fb.rating)].map((_, i) => (
+                              <Star key={i} className="w-4 h-4 text-yellow-500" />
+                            ))}
+                          </div>
+                        </TableCell>
                         <TableCell>{getStatusBadge(fb.status)}</TableCell>
                         <TableCell>{formatDate(fb.createdAt)}</TableCell>
                         <TableCell>
@@ -1464,34 +1410,23 @@ export default function AdminPanel() {
                                   <span className="sr-only">View details</span>
                                 </Button>
                               </DialogTrigger>
-                              <DialogContent className="max-w-3xl mx-4">
+                              <DialogContent className="max-w-2xl mx-4">
                                 <DialogHeader>
                                   <DialogTitle>Feedback Details</DialogTitle>
                                 </DialogHeader>
                                 <ScrollArea className="max-h-96">
-                                  <div className="space-y-6">
+                                  <div className="space-y-4">
                                     <div>
-                                      <h4 className="font-semibold mb-2">User Information</h4>
-                                      <div className="space-y-1 text-sm">
-                                        <div>
-                                          <strong>Name:</strong> {fb.name}
-                                        </div>
-                                        <div>
-                                          <strong>Email:</strong> {fb.email}
-                                        </div>
-                                      </div>
+                                      <strong>Name:</strong> {fb.name}
                                     </div>
-
                                     <div>
-                                      <h4 className="font-semibold mb-2">Feedback Details</h4>
-                                      <div className="space-y-1 text-sm">
-                                        <div>
-                                          <strong>Rating:</strong> {fb.rating}
-                                        </div>
-                                        <div>
-                                          <strong>Feedback:</strong> {fb.feedback}
-                                        </div>
-                                      </div>
+                                      <strong>Email:</strong> {fb.email}
+                                    </div>
+                                    <div>
+                                      <strong>Feedback:</strong> {fb.feedbackText}
+                                    </div>
+                                    <div>
+                                      <strong>Rating:</strong> {fb.rating}
                                     </div>
                                   </div>
                                 </ScrollArea>
@@ -1532,27 +1467,27 @@ export default function AdminPanel() {
                 <Lightbulb className="w-5 h-5" />
                 Feature Suggestions
               </CardTitle>
-              <p className="text-sm text-muted-foreground">Review and manage user feature suggestions</p>
+              <p className="text-sm text-muted-foreground">Review and manage user-submitted feature suggestions</p>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="min-w-[140px]">User</TableHead>
-                      <TableHead className="min-w-[180px]">Email</TableHead>
-                      <TableHead className="min-w-[200px]">Suggestion</TableHead>
+                      <TableHead className="min-w-[160px]">Title</TableHead>
+                      <TableHead className="min-w-[200px]">Description</TableHead>
+                      <TableHead className="min-w-[120px]">Category</TableHead>
                       <TableHead className="min-w-[100px]">Status</TableHead>
-                      <TableHead className="min-w-[120px]">Date</TableHead>
+                      <TableHead className="min-w-[120px]">Submitted</TableHead>
                       <TableHead className="min-w-[140px]">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {featureSuggestions.map((suggestion) => (
                       <TableRow key={suggestion.id}>
-                        <TableCell className="font-medium">{suggestion.name}</TableCell>
-                        <TableCell>{suggestion.email}</TableCell>
-                        <TableCell className="truncate">{suggestion.suggestion}</TableCell>
+                        <TableCell className="font-medium">{suggestion.title}</TableCell>
+                        <TableCell className="truncate">{suggestion.description}</TableCell>
+                        <TableCell>{suggestion.category}</TableCell>
                         <TableCell>{getStatusBadge(suggestion.status)}</TableCell>
                         <TableCell>{formatDate(suggestion.createdAt)}</TableCell>
                         <TableCell>
@@ -1564,31 +1499,20 @@ export default function AdminPanel() {
                                   <span className="sr-only">View details</span>
                                 </Button>
                               </DialogTrigger>
-                              <DialogContent className="max-w-3xl mx-4">
+                              <DialogContent className="max-w-2xl mx-4">
                                 <DialogHeader>
                                   <DialogTitle>Feature Suggestion Details</DialogTitle>
                                 </DialogHeader>
                                 <ScrollArea className="max-h-96">
-                                  <div className="space-y-6">
+                                  <div className="space-y-4">
                                     <div>
-                                      <h4 className="font-semibold mb-2">User Information</h4>
-                                      <div className="space-y-1 text-sm">
-                                        <div>
-                                          <strong>Name:</strong> {suggestion.name}
-                                        </div>
-                                        <div>
-                                          <strong>Email:</strong> {suggestion.email}
-                                        </div>
-                                      </div>
+                                      <strong>Title:</strong> {suggestion.title}
                                     </div>
-
                                     <div>
-                                      <h4 className="font-semibold mb-2">Suggestion Details</h4>
-                                      <div className="space-y-1 text-sm">
-                                        <div>
-                                          <strong>Suggestion:</strong> {suggestion.suggestion}
-                                        </div>
-                                      </div>
+                                      <strong>Description:</strong> {suggestion.description}
+                                    </div>
+                                    <div>
+                                      <strong>Category:</strong> {suggestion.category}
                                     </div>
                                   </div>
                                 </ScrollArea>
@@ -1626,4 +1550,21 @@ export default function AdminPanel() {
       </Tabs>
     </div>
   )
+
+  async function handleOrderStatus(orderId, status) {
+    try {
+      await updateOrderStatus(orderId, status)
+      setOrders(orders.map((order) => (order.id === orderId ? { ...order, status } : order)))
+      toast({
+        title: "Success",
+        description: `Order status updated to ${status} successfully!`,
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update order status.",
+        variant: "destructive",
+      })
+    }
+  }
 }
